@@ -15,6 +15,7 @@ If it has already been created, obtain the storage backend attributes and skip t
 
 The [Azure tutorial](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) outlines the steps to create a storage account and container for the state file. You will need:
 
+- subscription_id: The id of the azure Subscription the resource group belongs to
 - resource_group_name: The name of the resource group used for the Azure Storage account.
 - storage_account_name: The name of the Azure Storage account.
 - container_name: The name of the blob container.
