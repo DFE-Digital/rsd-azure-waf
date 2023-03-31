@@ -1,5 +1,11 @@
 # Local .terraform directories
-**/.terraform/*
+.terraformrc*
+terraform.rc*
+*.tfstate*
+*.tfvars*
+.terraform/
+!terraform.tfvars.example
+backend.vars
 
 # .tfstate files
 *.tfstate
@@ -27,3 +33,4 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+backend.vars
