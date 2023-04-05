@@ -46,21 +46,17 @@ key                  = "terraform.tstate"
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.50.0 |
+No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azurerm_front_door_waf"></a> [azurerm\_front\_door\_waf](#module\_azurerm\_front\_door\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-waf | v0.1.0 |
+| <a name="module_azurerm_front_door_waf"></a> [azurerm\_front\_door\_waf](#module\_azurerm\_front\_door\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-waf | v0.2.0 |
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [azurerm_cdn_frontdoor_endpoint.origins](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/cdn_frontdoor_endpoint) | data source |
+No resources.
 
 ## Inputs
 
@@ -68,19 +64,17 @@ key                  = "terraform.tstate"
 |------|-------------|------|---------|:--------:|
 | <a name="input_azure_location"></a> [azure\_location](#input\_azure\_location) | Azure location in which to launch resources. | `string` | n/a | yes |
 | <a name="input_certificates"></a> [certificates](#input\_certificates) | Customer managed certificates (.pfx) | `map(any)` | n/a | yes |
-| <a name="input_custom_domains"></a> [custom\_domains](#input\_custom\_domains) | Azure CDN Front Door custom domains. If they are within the DNS zone (optionally created), the Validation TXT records and ALIAS/CNAME records will be created | `map(any)` | n/a | yes |
-| <a name="input_enable_health_probe"></a> [enable\_health\_probe](#input\_enable\_health\_probe) | Enable CDN Front Door health probe | `bool` | n/a | yes |
 | <a name="input_enable_latency_monitor"></a> [enable\_latency\_monitor](#input\_enable\_latency\_monitor) | Monitor latency between the Front Door and it's origin | `bool` | n/a | yes |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable CDN Front Door WAF | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_key_vault_access_users"></a> [key\_vault\_access\_users](#input\_key\_vault\_access\_users) | A list of Azure AD Users that are granted Secret & Certificate management permissions to the Key Vault | `list(string)` | n/a | yes |
 | <a name="input_key_vault_allow_ipv4_list"></a> [key\_vault\_allow\_ipv4\_list](#input\_key\_vault\_allow\_ipv4\_list) | A list of IPv4 addresses to permit access to the Key Vault that holds the TLS Certificates | `list(string)` | n/a | yes |
-| <a name="input_origins"></a> [origins](#input\_origins) | A set of Front Door Endpoints that you want to sit behind this Front Door | `map(any)` | n/a | yes |
+| <a name="input_monitor_action_group_id"></a> [monitor\_action\_group\_id](#input\_monitor\_action\_group\_id) | Specify the Action Group ID that you want to send the Latency monitor alerts to. Required if 'enable\_latency\_monitor' is true | `string` | n/a | yes |
+| <a name="input_origin_groups"></a> [origin\_groups](#input\_origin\_groups) | A set of Endpoints that you want to sit behind this Front Door | `map(any)` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_response_timeout"></a> [response\_timeout](#input\_response\_timeout) | Azure CDN Front Door response timeout in seconds | `number` | n/a | yes |
 | <a name="input_sku"></a> [sku](#input\_sku) | Azure CDN Front Door SKU | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources | `map(string)` | n/a | yes |
-| <a name="input_tfvars_filename"></a> [tfvars\_filename](#input\_tfvars\_filename) | tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place. | `string` | n/a | yes |
 | <a name="input_waf_enable_bot_protection"></a> [waf\_enable\_bot\_protection](#input\_waf\_enable\_bot\_protection) | Deploy a Bot Protection Policy on the Front Door WAF | `bool` | n/a | yes |
 | <a name="input_waf_enable_default_ruleset"></a> [waf\_enable\_default\_ruleset](#input\_waf\_enable\_default\_ruleset) | Deploy a Managed DRS Policy on the Front Door WAF | `bool` | n/a | yes |
 | <a name="input_waf_enable_rate_limiting"></a> [waf\_enable\_rate\_limiting](#input\_waf\_enable\_rate\_limiting) | Deploy a Rate Limiting Policy on the Front Door WAF | `bool` | n/a | yes |
