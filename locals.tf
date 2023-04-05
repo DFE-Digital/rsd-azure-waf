@@ -1,20 +1,18 @@
 locals {
-  environment     = var.environment
-  project_name    = var.project_name
-  azure_location  = var.azure_location
-  tfvars_filename = var.tfvars_filename
+  environment    = var.environment
+  project_name   = var.project_name
+  azure_location = var.azure_location
 
   sku                       = var.sku
-  enable_health_probe       = var.enable_health_probe
   enable_latency_monitor    = var.enable_latency_monitor
+  monitor_action_group_id   = var.monitor_action_group_id
   response_timeout          = var.response_timeout
-  front_door_endpoints      = var.origins
   key_vault_allow_ipv4_list = var.key_vault_allow_ipv4_list
   key_vault_access_users    = var.key_vault_access_users
 
-  origins        = { for o in data.azurerm_cdn_frontdoor_endpoint.origins : element(split("/", o.id), length(split("/", o.id)) - 1) => o.host_name }
-  custom_domains = var.custom_domains
-  certificates   = { for i, c in var.certificates : i => { password : c.password, contents : filebase64(abspath(c.contents)) } }
+  origin_groups = var.origin_groups
+
+  certificates = { for i, c in var.certificates : i => { password : c.password, contents : filebase64(abspath(c.contents)) } }
 
   enable_waf                            = var.enable_waf
   waf_enable_rate_limiting              = var.waf_enable_rate_limiting

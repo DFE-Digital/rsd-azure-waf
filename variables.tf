@@ -18,11 +18,6 @@ variable "key_vault_access_users" {
   type        = list(string)
 }
 
-# variable "tfvars_filename" {
-#   description = "tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place."
-#   type        = string
-# }
-
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
@@ -38,24 +33,19 @@ variable "key_vault_allow_ipv4_list" {
   type        = list(string)
 }
 
-variable "enable_health_probe" {
-  description = "Enable CDN Front Door health probe"
-  type        = bool
-}
-
 variable "enable_latency_monitor" {
   description = "Monitor latency between the Front Door and it's origin"
   type        = bool
 }
 
+variable "monitor_action_group_id" {
+  description = "Specify the Action Group ID that you want to send the Latency monitor alerts to. Required if 'enable_latency_monitor' is true"
+  type        = string
+}
+
 variable "response_timeout" {
   description = "Azure CDN Front Door response timeout in seconds"
   type        = number
-}
-
-variable "custom_domains" {
-  description = "Azure CDN Front Door custom domains. If they are within the DNS zone (optionally created), the Validation TXT records and ALIAS/CNAME records will be created"
-  type        = map(any)
 }
 
 variable "certificates" {
@@ -99,7 +89,7 @@ variable "waf_enable_default_ruleset" {
   type        = bool
 }
 
-variable "origins" {
-  description = "A set of Front Door Endpoints that you want to sit behind this Front Door"
+variable "origin_groups" {
+  description = "A set of Endpoints that you want to sit behind this Front Door"
   type        = map(any)
 }
