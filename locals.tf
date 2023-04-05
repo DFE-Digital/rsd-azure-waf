@@ -29,6 +29,7 @@ locals {
   } }
 
   enable_waf                            = var.enable_waf
+  waf_mode                              = var.waf_mode
   waf_enable_rate_limiting              = var.waf_enable_rate_limiting
   waf_rate_limiting_duration_in_minutes = var.waf_rate_limiting_duration_in_minutes
   waf_rate_limiting_threshold           = var.waf_rate_limiting_threshold

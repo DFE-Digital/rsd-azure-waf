@@ -23,6 +23,11 @@ variable "sku" {
   type        = string
 }
 
+variable "waf_mode" {
+  description = "CDN Front Door WAF mode"
+  type        = string
+}
+
 variable "enable_latency_monitor" {
   description = "Monitor latency between the Front Door and it's origin"
   type        = bool

@@ -14,6 +14,7 @@ module "azurerm_front_door_waf" {
   origin_groups = local.origin_groups
 
   enable_waf                            = local.enable_waf
+  waf_mode                              = local.waf_mode
   waf_enable_rate_limiting              = local.waf_enable_rate_limiting
   waf_rate_limiting_duration_in_minutes = local.waf_rate_limiting_duration_in_minutes
   waf_rate_limiting_threshold           = local.waf_rate_limiting_threshold
