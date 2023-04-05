@@ -1,18 +1,19 @@
 module "azurerm_front_door_waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.1.0"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.2.0"
 
   environment    = local.environment
   project_name   = local.project_name
   azure_location = local.azure_location
 
   sku                     = local.sku
-  enable_health_probe     = local.enable_health_probe
   enable_latency_monitor  = local.enable_latency_monitor
+  monitor_action_group_id = local.monitor_action_group_id
   response_timeout        = local.response_timeout
-  origins                 = local.origins
-  monitor_action_group_id = null
-  custom_domains          = local.custom_domains
-  certificates            = local.certificates
+
+  # Origins
+  origin_groups = local.origin_groups
+
+  certificates = local.certificates
 
   key_vault_allow_ipv4_list = local.key_vault_allow_ipv4_list
   key_vault_access_users    = local.key_vault_access_users
