@@ -69,7 +69,6 @@ key                  = "terraform.tstate"
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_azure_location"></a> [azure\_location](#input\_azure\_location) | Azure location in which to launch resources. | `string` | n/a | yes |
-| <a name="input_certificates"></a> [certificates](#input\_certificates) | Customer managed certificates (.pfx) | `map(any)` | n/a | yes |
 | <a name="input_container_app_origins"></a> [container\_app\_origins](#input\_container\_app\_origins) | A map of Container App names to use as Origins | `map(any)` | n/a | yes |
 | <a name="input_enable_latency_monitor"></a> [enable\_latency\_monitor](#input\_enable\_latency\_monitor) | Monitor latency between the Front Door and it's origin | `bool` | n/a | yes |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable CDN Front Door WAF | `bool` | `false` | no |

@@ -7,8 +7,6 @@ locals {
   enable_latency_monitor    = var.enable_latency_monitor
   monitor_action_group_id   = var.monitor_action_group_id
   response_timeout          = var.response_timeout
-  key_vault_allow_ipv4_list = var.key_vault_allow_ipv4_list
-  key_vault_access_users    = var.key_vault_access_users
 
   # Populate the Resource Group IDs
   container_app_origin_group_with_resource_ids = { for name, options in var.container_app_origins : name => {
@@ -30,7 +28,11 @@ locals {
     health_probe_path : origin_group.health_probe_path
   } }
 
-  certificates = { for i, c in var.certificates : i => { password : c.password, contents : filebase64(abspath(c.contents)) } }
+  domain_map = flatten([for k, o in var.origin_groups : [for _o in o.domains : {
+    name : "${k}${index(o.domains, _o)}",
+    host_name : _o,
+    route_name : k
+  }]])
 
   enable_waf                            = var.enable_waf
   waf_enable_rate_limiting              = var.waf_enable_rate_limiting

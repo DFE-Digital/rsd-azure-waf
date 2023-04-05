@@ -13,11 +13,6 @@ module "azurerm_front_door_waf" {
   # Origins
   origin_groups = local.origin_groups
 
-  certificates = local.certificates
-
-  key_vault_allow_ipv4_list = local.key_vault_allow_ipv4_list
-  key_vault_access_users    = local.key_vault_access_users
-
   enable_waf                            = local.enable_waf
   waf_enable_rate_limiting              = local.waf_enable_rate_limiting
   waf_rate_limiting_duration_in_minutes = local.waf_rate_limiting_duration_in_minutes
