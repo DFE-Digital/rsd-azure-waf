@@ -64,14 +64,19 @@ variable "waf_rate_limiting_bypass_ip_list" {
   type        = list(string)
 }
 
-variable "waf_enable_bot_protection" {
-  description = "Deploy a Bot Protection Policy on the Front Door WAF"
-  type        = bool
-}
-
-variable "waf_enable_default_ruleset" {
-  description = "Deploy a Managed DRS Policy on the Front Door WAF"
-  type        = bool
+variable "waf_managed_rulesets" {
+  description = "Map of all Managed rules you want to apply including any overrides"
+  type        = map(any)
+  default = {
+    "BotProtection" : {
+      version : "preview-0.1",
+      action : "Block"
+    },
+    "DefaultRuleSet" : {
+      version : "1.0",
+      action : "Block"
+    }
+  }
 }
 
 variable "origin_groups" {

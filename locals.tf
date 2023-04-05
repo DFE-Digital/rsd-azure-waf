@@ -3,10 +3,10 @@ locals {
   project_name   = var.project_name
   azure_location = var.azure_location
 
-  sku                       = var.sku
-  enable_latency_monitor    = var.enable_latency_monitor
-  monitor_action_group_id   = var.monitor_action_group_id
-  response_timeout          = var.response_timeout
+  sku                     = var.sku
+  enable_latency_monitor  = var.enable_latency_monitor
+  monitor_action_group_id = var.monitor_action_group_id
+  response_timeout        = var.response_timeout
 
   # Populate the Resource Group IDs
   container_app_origin_group_with_resource_ids = { for name, options in var.container_app_origins : name => {
@@ -39,8 +39,7 @@ locals {
   waf_rate_limiting_duration_in_minutes = var.waf_rate_limiting_duration_in_minutes
   waf_rate_limiting_threshold           = var.waf_rate_limiting_threshold
   waf_rate_limiting_bypass_ip_list      = var.waf_rate_limiting_bypass_ip_list
-  waf_enable_bot_protection             = var.waf_enable_bot_protection
-  waf_enable_default_ruleset            = var.waf_enable_default_ruleset
+  waf_managed_rulesets                  = var.waf_managed_rulesets
 
   tags = var.tags
 }
