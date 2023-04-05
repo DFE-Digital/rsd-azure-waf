@@ -28,12 +28,6 @@ locals {
     health_probe_path : origin_group.health_probe_path
   } }
 
-  domain_map = flatten([for k, o in var.origin_groups : [for _o in o.domains : {
-    name : "${k}${index(o.domains, _o)}",
-    host_name : _o,
-    route_name : k
-  }]])
-
   enable_waf                            = var.enable_waf
   waf_enable_rate_limiting              = var.waf_enable_rate_limiting
   waf_rate_limiting_duration_in_minutes = var.waf_rate_limiting_duration_in_minutes
