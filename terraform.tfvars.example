@@ -8,11 +8,17 @@ enable_latency_monitor  = true
 ## Action Group ID
 # monitor_action_group_id = "/xxx/abcdefg"
 
+container_app_origins = {
+  "my-container-app" = {
+    name              = "container-app-name"
+    origin_group_name = "first-origin-group"
+    resource_group    = "my-resource-group"
+  }
+}
+
 origin_groups = {
   "first-origin-group" = {
-    origins = [
-      "my-origin.hostname"
-    ],
+    origins = [], # uses a container app origin
     domains                   = [
       "my-custom.domain.tld
     ]

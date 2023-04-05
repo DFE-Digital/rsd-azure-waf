@@ -93,3 +93,8 @@ variable "origin_groups" {
   description = "A set of Endpoints that you want to sit behind this Front Door"
   type        = map(any)
 }
+
+variable "container_app_origins" {
+  description = "A map of Container App names to use as Origins"
+  type        = map(any)
+}
