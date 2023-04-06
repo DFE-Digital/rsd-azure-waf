@@ -13,11 +13,6 @@ variable "azure_location" {
   type        = string
 }
 
-variable "key_vault_access_users" {
-  description = "A list of Azure AD Users that are granted Secret & Certificate management permissions to the Key Vault"
-  type        = list(string)
-}
-
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
@@ -28,9 +23,9 @@ variable "sku" {
   type        = string
 }
 
-variable "key_vault_allow_ipv4_list" {
-  description = "A list of IPv4 addresses to permit access to the Key Vault that holds the TLS Certificates"
-  type        = list(string)
+variable "waf_mode" {
+  description = "CDN Front Door WAF mode"
+  type        = string
 }
 
 variable "enable_latency_monitor" {
@@ -46,11 +41,6 @@ variable "monitor_action_group_id" {
 variable "response_timeout" {
   description = "Azure CDN Front Door response timeout in seconds"
   type        = number
-}
-
-variable "certificates" {
-  description = "Customer managed certificates (.pfx)"
-  type        = map(any)
 }
 
 variable "enable_waf" {
@@ -79,17 +69,32 @@ variable "waf_rate_limiting_bypass_ip_list" {
   type        = list(string)
 }
 
-variable "waf_enable_bot_protection" {
-  description = "Deploy a Bot Protection Policy on the Front Door WAF"
-  type        = bool
+variable "waf_managed_rulesets" {
+  description = "Map of all Managed rules you want to apply to the WAF, including any overrides"
+  type        = map(any)
+  default = {
+    "BotProtection" : {
+      version : "preview-0.1",
+      action : "Block"
+    },
+    "DefaultRuleSet" : {
+      version : "1.0",
+      action : "Block"
+    }
+  }
 }
 
-variable "waf_enable_default_ruleset" {
-  description = "Deploy a Managed DRS Policy on the Front Door WAF"
-  type        = bool
+variable "waf_custom_rules" {
+  description = "Map of all Custom rules you want to apply to the WAF"
+  type        = map(any)
 }
 
 variable "origin_groups" {
   description = "A set of Endpoints that you want to sit behind this Front Door"
+  type        = map(any)
+}
+
+variable "container_app_origins" {
+  description = "A map of Container App names to use as Origins"
   type        = map(any)
 }

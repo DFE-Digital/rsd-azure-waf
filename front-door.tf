@@ -13,18 +13,14 @@ module "azurerm_front_door_waf" {
   # Origins
   origin_groups = local.origin_groups
 
-  certificates = local.certificates
-
-  key_vault_allow_ipv4_list = local.key_vault_allow_ipv4_list
-  key_vault_access_users    = local.key_vault_access_users
-
   enable_waf                            = local.enable_waf
+  waf_mode                              = local.waf_mode
   waf_enable_rate_limiting              = local.waf_enable_rate_limiting
   waf_rate_limiting_duration_in_minutes = local.waf_rate_limiting_duration_in_minutes
   waf_rate_limiting_threshold           = local.waf_rate_limiting_threshold
   waf_rate_limiting_bypass_ip_list      = local.waf_rate_limiting_bypass_ip_list
-  waf_enable_bot_protection             = local.waf_enable_bot_protection
-  waf_enable_default_ruleset            = local.waf_enable_default_ruleset
+  waf_managed_rulesets                  = local.waf_managed_rulesets
+  waf_custom_rules                      = local.waf_custom_rules
 
   tags = local.tags
 }
