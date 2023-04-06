@@ -20,6 +20,7 @@ module "azurerm_front_door_waf" {
   waf_rate_limiting_threshold           = local.waf_rate_limiting_threshold
   waf_rate_limiting_bypass_ip_list      = local.waf_rate_limiting_bypass_ip_list
   waf_managed_rulesets                  = local.waf_managed_rulesets
+  waf_custom_rules                      = local.waf_custom_rules
 
   tags = local.tags
 }

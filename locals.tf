@@ -35,6 +35,7 @@ locals {
   waf_rate_limiting_threshold           = var.waf_rate_limiting_threshold
   waf_rate_limiting_bypass_ip_list      = var.waf_rate_limiting_bypass_ip_list
   waf_managed_rulesets                  = var.waf_managed_rulesets
+  waf_custom_rules                      = var.waf_custom_rules
 
   tags = var.tags
 }
