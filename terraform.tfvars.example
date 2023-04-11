@@ -16,9 +16,9 @@ container_app_origins = {
   }
 }
 
-origin_groups = {
+endpoints = {
   "first-origin-group" = {
-    origins = [], # uses a container app origin
+    targets = [], # uses a container app origin
     domains                   = [
       "my-custom.domain.tld
     ]
@@ -40,21 +40,6 @@ origin_groups = {
     health_probe_path         = "/healthcheck"
   },
 }
-
-certificates = {
-  # "my-certificate" = {
-  #   contents = "certificates/my-certificate.pfx",
-  #   password = "xyz"
-  # }
-}
-
-key_vault_access_users = [
-  "my.email_domain.tld#EXT#@platformidentity.onmicrosoft.com",
-]
-
-key_vault_allow_ipv4_list = [
-  "8.8.8.8", # Replace with a trusted IP range
-]
 
 enable_waf                            = true
 waf_enable_rate_limiting              = true

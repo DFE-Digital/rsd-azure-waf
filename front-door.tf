@@ -11,7 +11,7 @@ module "azurerm_front_door_waf" {
   response_timeout        = local.response_timeout
 
   # Origins
-  origin_groups = local.origin_groups
+  endpoints = local.endpoints
 
   enable_waf                            = local.enable_waf
   waf_mode                              = local.waf_mode
