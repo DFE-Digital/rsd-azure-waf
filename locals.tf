@@ -19,13 +19,13 @@ locals {
   container_app_origin_group = { for name, options in local.container_app_origin_group_with_resource_ids : options.origin_group_name => jsondecode(data.azapi_resource.container_apps[name].output).properties.configuration.ingress.fqdn }
 
   # Override the Origin hostnames with the Container App hostnames
-  origin_groups = { for name, origin_group in var.origin_groups : name => {
-    origins : length(origin_group.origins) == 0 ? try(local.container_app_origin_group[name] != "", false) ? [local.container_app_origin_group[name]] : [] : origin_group.origins
-    domains : origin_group.domains
-    enable_health_probe : origin_group.enable_health_probe
-    health_probe_interval : origin_group.health_probe_interval
-    health_probe_request_type : origin_group.health_probe_request_type
-    health_probe_path : origin_group.health_probe_path
+  endpoints = { for name, endpoint in var.endpoints : name => {
+    targets : length(endpoint.targets) == 0 ? try(local.container_app_origin_group[name] != "", false) ? [local.container_app_origin_group[name]] : [] : endpoint.targets
+    domains : endpoint.domains
+    enable_health_probe : endpoint.enable_health_probe
+    health_probe_interval : endpoint.health_probe_interval
+    health_probe_request_type : endpoint.health_probe_request_type
+    health_probe_path : endpoint.health_probe_path
   } }
 
   enable_waf                            = var.enable_waf

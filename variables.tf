@@ -89,7 +89,7 @@ variable "waf_custom_rules" {
   type        = map(any)
 }
 
-variable "origin_groups" {
+variable "endpoints" {
   description = "A set of Endpoints that you want to sit behind this Front Door"
   type        = map(any)
 }
