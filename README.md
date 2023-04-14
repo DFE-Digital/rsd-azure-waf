@@ -1,6 +1,10 @@
 # rsd-azure-front-door-waf
 Azure Front Door WAF for RSD
 
+[![Terraform CI](./actions/workflows/continuous-integration-terraform.yml/badge.svg?branch=main)](./actions/workflows/continuous-integration-terraform.yml?branch=main)
+[![Tflint](./actions/workflows/continuous-integration-tflint.yml/badge.svg?branch=main)](./actions/workflows/continuous-integration-tflint.yml?branch=main)
+[![Tfsec](./actions/workflows/continuous-integration-tfsec.yml/badge.svg?branch=main)](./actions/workflows/continuous-integration-tfsec.yml?branch=main)
+
 #### Configuring the storage backend
 
 The Terraform state is stored remotely in Azure, this allows multiple team members to
