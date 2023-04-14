@@ -1,17 +1,14 @@
 module "azurerm_front_door_waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.2.0"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.1.0"
 
   environment    = local.environment
   project_name   = local.project_name
   azure_location = local.azure_location
 
-  sku                     = local.sku
-  enable_latency_monitor  = local.enable_latency_monitor
-  monitor_action_group_id = local.monitor_action_group_id
-  response_timeout        = local.response_timeout
+  cdn_sku              = local.cdn_sku
+  cdn_response_timeout = local.cdn_response_timeout
 
-  # Origins
-  endpoints = local.endpoints
+  cdn_waf_targets = local.cdn_waf_targets
 
   enable_waf                            = local.enable_waf
   waf_mode                              = local.waf_mode
