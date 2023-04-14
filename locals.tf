@@ -3,30 +3,42 @@ locals {
   project_name   = var.project_name
   azure_location = var.azure_location
 
-  sku                     = var.sku
-  enable_latency_monitor  = var.enable_latency_monitor
-  monitor_action_group_id = var.monitor_action_group_id
-  response_timeout        = var.response_timeout
-
-  # Populate the Resource Group IDs
-  container_app_origin_group_with_resource_ids = { for name, options in var.container_app_origins : name => {
-    name : options.name
-    origin_group_name : options.origin_group_name
-    resource_group_id : data.azurerm_resource_group.container_apps[name].id
-  } }
-
-  # Grab the Container App FQDN
-  container_app_origin_group = { for name, options in local.container_app_origin_group_with_resource_ids : options.origin_group_name => jsondecode(data.azapi_resource.container_apps[name].output).properties.configuration.ingress.fqdn }
-
-  # Override the Origin hostnames with the Container App hostnames
-  endpoints = { for name, endpoint in var.endpoints : name => {
-    targets : length(endpoint.targets) == 0 ? try(local.container_app_origin_group[name] != "", false) ? [local.container_app_origin_group[name]] : [] : endpoint.targets
-    domains : endpoint.domains
-    enable_health_probe : endpoint.enable_health_probe
-    health_probe_interval : endpoint.health_probe_interval
-    health_probe_request_type : endpoint.health_probe_request_type
-    health_probe_path : endpoint.health_probe_path
-  } }
+  cdn_sku                     = var.cdn_sku
+  cdn_response_timeout        = var.cdn_response_timeout
+  cdn_container_app_targets   = var.cdn_container_app_targets
+  cdn_web_app_service_targets = var.cdn_web_app_service_targets
+  cdn_windows_web_app_service_targets = {
+    for cdn_web_app_service_target_name, cdn_web_app_service_target_value in local.cdn_web_app_service_targets : cdn_web_app_service_target_name => cdn_web_app_service_target_value if cdn_web_app_service_target_value.os == "Windows"
+  }
+  cdn_linux_web_app_service_targets = {
+    for cdn_web_app_service_target_name, cdn_web_app_service_target_value in local.cdn_web_app_service_targets : cdn_web_app_service_target_name => cdn_web_app_service_target_value if cdn_web_app_service_target_value.os == "Linux"
+  }
+  cdn_waf_targets = merge(
+    {
+      for cdn_container_app_target_name, cdn_container_app_target_value in local.cdn_container_app_targets : replace(cdn_container_app_target_name, local.environment, "") => merge(
+        {
+          domain = jsondecode(data.azapi_resource.container_apps[cdn_container_app_target_name].output).properties.configuration.ingress.fqdn
+        },
+        cdn_container_app_target_value
+      )
+    },
+    {
+      for cdn_windows_web_app_service_target_name, cdn_windows_web_app_service_target_value in local.cdn_windows_web_app_service_targets : replace(cdn_windows_web_app_service_target_name, local.environment, "") => merge(
+        {
+          domain = data.azurerm_windows_web_app.web_apps[cdn_windows_web_app_service_target_name].default_hostname
+        },
+        cdn_windows_web_app_service_target_value
+      )
+    },
+    {
+      for cdn_linux_web_app_service_target_name, cdn_linux_web_app_service_target_value in local.cdn_linux_web_app_service_targets : replace(cdn_linux_web_app_service_target_name, local.environment, "") => merge(
+        {
+          domain = data.azurerm_linux_web_app.web_apps[cdn_linux_web_app_service_target_name].default_hostname
+        },
+        cdn_linux_web_app_service_target_value
+      )
+    }
+  )
 
   enable_waf                            = var.enable_waf
   waf_mode                              = var.waf_mode

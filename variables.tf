@@ -18,27 +18,12 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "sku" {
+variable "cdn_sku" {
   description = "Azure CDN Front Door SKU"
   type        = string
 }
 
-variable "waf_mode" {
-  description = "CDN Front Door WAF mode"
-  type        = string
-}
-
-variable "enable_latency_monitor" {
-  description = "Monitor latency between the Front Door and it's origin"
-  type        = bool
-}
-
-variable "monitor_action_group_id" {
-  description = "Specify the Action Group ID that you want to send the Latency monitor alerts to. Required if 'enable_latency_monitor' is true"
-  type        = string
-}
-
-variable "response_timeout" {
+variable "cdn_response_timeout" {
   description = "Azure CDN Front Door response timeout in seconds"
   type        = number
 }
@@ -48,6 +33,12 @@ variable "enable_waf" {
   type        = bool
   default     = false
 }
+
+variable "waf_mode" {
+  description = "CDN Front Door WAF mode"
+  type        = string
+}
+
 
 variable "waf_enable_rate_limiting" {
   description = "Deploy a Rate Limiting Policy on the Front Door WAF"
@@ -71,30 +62,64 @@ variable "waf_rate_limiting_bypass_ip_list" {
 
 variable "waf_managed_rulesets" {
   description = "Map of all Managed rules you want to apply to the WAF, including any overrides"
-  type        = map(any)
-  default = {
-    "BotProtection" : {
-      version : "preview-0.1",
-      action : "Block"
-    },
-    "DefaultRuleSet" : {
-      version : "1.0",
-      action : "Block"
-    }
-  }
+  type = map(object({
+    version : string,
+    action : string,
+    exclusions : optional(map(object({
+      match_variable : string,
+      operator : string,
+      selector : string
+    })), {})
+    overrides : optional(map(map(object({
+      action : string,
+      exclusions : optional(map(object({
+        match_variable : string,
+        operator : string,
+        selector : string
+      })), {})
+    }))), {})
+  }))
+  default = {}
 }
 
 variable "waf_custom_rules" {
   description = "Map of all Custom rules you want to apply to the WAF"
-  type        = map(any)
+  type = map(object({
+    priority : number,
+    action : string,
+    match_conditions : map(object({
+      match_variable : string,
+      match_values : list(string),
+      operator : string,
+      selector : optional(string, null)
+    }))
+  }))
+  default = {}
 }
 
-variable "endpoints" {
-  description = "A set of Endpoints that you want to sit behind this Front Door"
-  type        = map(any)
+variable "cdn_container_app_targets" {
+  description = "A map of Container Apps to configure as CDN targets"
+  type = map(object({
+    resource_group : string,
+    create_custom_domain : optional(bool, false),
+    enable_health_probe : optional(bool, true)
+    health_probe_interval : optional(number, 60),
+    health_probe_request_type : optional(string, "HEAD"),
+    health_probe_path : optional(string, "/")
+  }))
+  default = {}
 }
 
-variable "container_app_origins" {
-  description = "A map of Container App names to use as Origins"
-  type        = map(any)
+variable "cdn_web_app_service_targets" {
+  description = "A map of Web App Services to configure as CDN targets"
+  type = map(object({
+    resource_group : string,
+    os : string
+    create_custom_domain : optional(bool, false),
+    enable_health_probe : optional(bool, true)
+    health_probe_interval : optional(number, 60),
+    health_probe_request_type : optional(string, "HEAD"),
+    health_probe_path : optional(string, "/")
+  }))
+  default = {}
 }
