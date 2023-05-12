@@ -1,5 +1,5 @@
 module "azurerm_front_door_waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.1.0"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=v0.2.0"
 
   environment    = local.environment
   project_name   = local.project_name
@@ -18,6 +18,9 @@ module "azurerm_front_door_waf" {
   waf_rate_limiting_bypass_ip_list      = local.waf_rate_limiting_bypass_ip_list
   waf_managed_rulesets                  = local.waf_managed_rulesets
   waf_custom_rules                      = local.waf_custom_rules
+
+  cdn_add_response_headers    = local.cdn_add_response_headers
+  cdn_remove_response_headers = local.cdn_remove_response_headers
 
   tags = local.tags
 }

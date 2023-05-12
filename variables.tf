@@ -39,7 +39,6 @@ variable "waf_mode" {
   type        = string
 }
 
-
 variable "waf_enable_rate_limiting" {
   description = "Deploy a Rate Limiting Policy on the Front Door WAF"
   type        = bool
@@ -102,10 +101,22 @@ variable "cdn_container_app_targets" {
   type = map(object({
     resource_group : string,
     create_custom_domain : optional(bool, false),
-    enable_health_probe : optional(bool, true)
+    enable_health_probe : optional(bool, true),
     health_probe_interval : optional(number, 60),
     health_probe_request_type : optional(string, "HEAD"),
-    health_probe_path : optional(string, "/")
+    health_probe_path : optional(string, "/"),
+    cdn_add_response_headers : optional(list(object({
+      name : string,
+      value : string
+      })
+    ), []),
+    cdn_add_request_headers : optional(list(object({
+      name : string,
+      value : string
+      })
+    ), []),
+    cdn_remove_response_headers : optional(list(string), []),
+    cdn_remove_request_headers : optional(list(string), [])
   }))
   default = {}
 }
@@ -119,7 +130,31 @@ variable "cdn_web_app_service_targets" {
     enable_health_probe : optional(bool, true)
     health_probe_interval : optional(number, 60),
     health_probe_request_type : optional(string, "HEAD"),
-    health_probe_path : optional(string, "/")
+    health_probe_path : optional(string, "/"),
+    cdn_add_response_headers : optional(list(object({
+      name : string,
+      value : string
+      })
+    ), []),
+    cdn_add_request_headers : optional(list(object({
+      name : string,
+      value : string
+      })
+    ), []),
+    cdn_remove_response_headers : optional(list(string), []),
+    cdn_remove_request_headers : optional(list(string), [])
   }))
   default = {}
+}
+
+variable "cdn_add_response_headers" {
+  description = "List of response headers to add at the CDN Front Door for all endpoints `[{ \"Name\" = \"Strict-Transport-Security\", \"value\" = \"max-age=31536000\" }]`"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "cdn_remove_response_headers" {
+  description = "List of response headers to remove at the CDN Front Door for all endpoints"
+  type        = list(string)
+  default     = []
 }
