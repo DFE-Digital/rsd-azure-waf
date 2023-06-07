@@ -3,6 +3,12 @@ locals {
   project_name   = var.project_name
   azure_location = var.azure_location
 
+  tfvars_filename                                    = var.tfvars_filename
+  key_vault_access_users                             = var.key_vault_access_users
+  key_vault_access_ipv4                              = var.key_vault_access_ipv4
+  key_vault_tfvars_enable_log_analytics_workspace    = var.key_vault_tfvars_enable_log_analytics_workspace
+  key_vault_tfvars_enable_diagnostic_storage_account = var.key_vault_tfvars_enable_diagnostic_storage_account
+
   cdn_sku                     = var.cdn_sku
   cdn_response_timeout        = var.cdn_response_timeout
   cdn_container_app_targets   = var.cdn_container_app_targets
