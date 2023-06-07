@@ -40,6 +40,9 @@ locals {
     }
   )
 
+  cdn_add_response_headers    = var.cdn_add_response_headers
+  cdn_remove_response_headers = var.cdn_remove_response_headers
+
   enable_waf                            = var.enable_waf
   waf_mode                              = var.waf_mode
   waf_enable_rate_limiting              = var.waf_enable_rate_limiting
