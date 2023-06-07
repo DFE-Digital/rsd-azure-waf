@@ -18,6 +18,33 @@ variable "tags" {
   type        = map(string)
 }
 
+variable "key_vault_access_users" {
+  description = "List of users that require access to the Key Vault where tfvars are stored. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform"
+  type        = list(string)
+}
+
+variable "key_vault_access_ipv4" {
+  description = "List of IPv4 Addresses that are permitted to access the Key Vault"
+  type        = list(string)
+}
+
+variable "tfvars_filename" {
+  description = "tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place."
+  type        = string
+}
+
+variable "key_vault_tfvars_enable_log_analytics_workspace" {
+  description = "When enabled, creates a Log Analyics Workspace for the tfvars Key Vault"
+  type        = bool
+  default     = true
+}
+
+variable "key_vault_tfvars_enable_diagnostic_storage_account" {
+  description = "When enabled, creates a Storage Account for the tfvars key vault diagnostic logs"
+  type        = bool
+  default     = true
+}
+
 variable "cdn_sku" {
   description = "Azure CDN Front Door SKU"
   type        = string
