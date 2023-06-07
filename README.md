@@ -52,14 +52,15 @@ key                  = "terraform.tstate"
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.5.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.52.0 |
+| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.6.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.59.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azurerm_front_door_waf"></a> [azurerm\_front\_door\_waf](#module\_azurerm\_front\_door\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-waf | v0.2.0 |
+| <a name="module_azurerm_key_vault"></a> [azurerm\_key\_vault](#module\_azurerm\_key\_vault) | github.com/DFE-Digital/terraform-azurerm-key-vault-tfvars | v0.2.0 |
 
 ## Resources
 
@@ -83,8 +84,13 @@ key                  = "terraform.tstate"
 | <a name="input_cdn_web_app_service_targets"></a> [cdn\_web\_app\_service\_targets](#input\_cdn\_web\_app\_service\_targets) | A map of Web App Services to configure as CDN targets | <pre>map(object({<br>    resource_group : string,<br>    os : string<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true)<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), [])<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable CDN Front Door WAF | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
+| <a name="input_key_vault_access_ipv4"></a> [key\_vault\_access\_ipv4](#input\_key\_vault\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the Key Vault | `list(string)` | n/a | yes |
+| <a name="input_key_vault_access_users"></a> [key\_vault\_access\_users](#input\_key\_vault\_access\_users) | List of users that require access to the Key Vault where tfvars are stored. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
+| <a name="input_key_vault_tfvars_enable_diagnostic_storage_account"></a> [key\_vault\_tfvars\_enable\_diagnostic\_storage\_account](#input\_key\_vault\_tfvars\_enable\_diagnostic\_storage\_account) | When enabled, creates a Storage Account for the tfvars key vault diagnostic logs | `bool` | `true` | no |
+| <a name="input_key_vault_tfvars_enable_log_analytics_workspace"></a> [key\_vault\_tfvars\_enable\_log\_analytics\_workspace](#input\_key\_vault\_tfvars\_enable\_log\_analytics\_workspace) | When enabled, creates a Log Analyics Workspace for the tfvars Key Vault | `bool` | `true` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources | `map(string)` | n/a | yes |
+| <a name="input_tfvars_filename"></a> [tfvars\_filename](#input\_tfvars\_filename) | tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place. | `string` | n/a | yes |
 | <a name="input_waf_custom_rules"></a> [waf\_custom\_rules](#input\_waf\_custom\_rules) | Map of all Custom rules you want to apply to the WAF | <pre>map(object({<br>    priority : number,<br>    action : string,<br>    match_conditions : map(object({<br>      match_variable : string,<br>      match_values : list(string),<br>      operator : string,<br>      selector : optional(string, null)<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_waf_enable_rate_limiting"></a> [waf\_enable\_rate\_limiting](#input\_waf\_enable\_rate\_limiting) | Deploy a Rate Limiting Policy on the Front Door WAF | `bool` | n/a | yes |
 | <a name="input_waf_managed_rulesets"></a> [waf\_managed\_rulesets](#input\_waf\_managed\_rulesets) | Map of all Managed rules you want to apply to the WAF, including any overrides | <pre>map(object({<br>    version : string,<br>    action : string,<br>    exclusions : optional(map(object({<br>      match_variable : string,<br>      operator : string,<br>      selector : string<br>    })), {})<br>    overrides : optional(map(map(object({<br>      action : string,<br>      exclusions : optional(map(object({<br>        match_variable : string,<br>        operator : string,<br>        selector : string<br>      })), {})<br>    }))), {})<br>  }))</pre> | `{}` | no |
