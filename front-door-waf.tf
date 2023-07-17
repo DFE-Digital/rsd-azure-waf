@@ -1,5 +1,5 @@
 module "azurerm_front_door_waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-waf?ref=add-custom-app-gateway-probes"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.3.0"
 
   environment    = local.environment
   project_name   = local.project_name
