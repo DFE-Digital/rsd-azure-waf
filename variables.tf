@@ -77,6 +77,21 @@ variable "waf_application" {
   type        = string
 }
 
+variable "waf_custom_rules" {
+  description = "Map of all Custom rules you want to apply to the WAF"
+  type = map(object({
+    priority : number,
+    action : string
+    match_conditions : map(object({
+      match_variable : string,
+      match_values : optional(list(string), []),
+      operator : optional(string, "Any"),
+      selector : optional(string, ""),
+    }))
+  }))
+  default = {}
+}
+
 variable "waf_mode" {
   description = "WAF mode"
   type        = string
@@ -129,6 +144,42 @@ variable "web_app_service_targets" {
     ), []),
     cdn_remove_response_headers : optional(list(string), []),
     cdn_remove_request_headers : optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "app_gateway_v2_waf_managed_rulesets" {
+  description = "Map of all Managed rules you want to apply to the App Gateway WAF, including any overrides"
+  type = map(object({
+    version : string,
+    overrides : optional(map(object({
+      rules : map(object({
+        enabled : bool,
+        action : optional(string, "Block")
+      }))
+    })), {})
+  }))
+  default = {
+    "OWASP" = {
+      version = "3.2"
+    },
+    "Microsoft_BotManagerRuleSet" = {
+      version = "1.0"
+    }
+  }
+}
+
+variable "app_gateway_v2_waf_managed_rulesets_exclusions" {
+  description = "Map of all exclusions and the associated Managed rules to apply to the App Gateway WAF"
+  type = map(object({
+    match_variable : string,
+    selector : string,
+    selector_match_operator : string,
+    excluded_rule_set : map(object({
+      version : string,
+      rule_group_name : string,
+      excluded_rules : list(string)
+    }))
   }))
   default = {}
 }
