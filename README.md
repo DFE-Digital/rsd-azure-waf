@@ -52,14 +52,14 @@ key                  = "terraform.tstate"
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.7.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.66.0 |
+| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.9.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azurerm_front_door_waf"></a> [azurerm\_front\_door\_waf](#module\_azurerm\_front\_door\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.3.2 |
+| <a name="module_azurerm_front_door_waf"></a> [azurerm\_front\_door\_waf](#module\_azurerm\_front\_door\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.3.3 |
 | <a name="module_azurerm_key_vault"></a> [azurerm\_key\_vault](#module\_azurerm\_key\_vault) | github.com/DFE-Digital/terraform-azurerm-key-vault-tfvars | v0.2.0 |
 
 ## Resources
@@ -75,6 +75,8 @@ key                  = "terraform.tstate"
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_app_gateway_v2_waf_managed_rulesets"></a> [app\_gateway\_v2\_waf\_managed\_rulesets](#input\_app\_gateway\_v2\_waf\_managed\_rulesets) | Map of all Managed rules you want to apply to the App Gateway WAF, including any overrides | <pre>map(object({<br>    version : string,<br>    overrides : optional(map(object({<br>      rules : map(object({<br>        enabled : bool,<br>        action : optional(string, "Block")<br>      }))<br>    })), {})<br>  }))</pre> | <pre>{<br>  "Microsoft_BotManagerRuleSet": {<br>    "version": "1.0"<br>  },<br>  "OWASP": {<br>    "version": "3.2"<br>  }<br>}</pre> | no |
+| <a name="input_app_gateway_v2_waf_managed_rulesets_exclusions"></a> [app\_gateway\_v2\_waf\_managed\_rulesets\_exclusions](#input\_app\_gateway\_v2\_waf\_managed\_rulesets\_exclusions) | Map of all exclusions and the associated Managed rules to apply to the App Gateway WAF | <pre>map(object({<br>    match_variable : string,<br>    selector : string,<br>    selector_match_operator : string,<br>    excluded_rule_set : map(object({<br>      version : string,<br>      rule_group_name : string,<br>      excluded_rules : list(string)<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_azure_location"></a> [azure\_location](#input\_azure\_location) | Azure location in which to launch resources. | `string` | n/a | yes |
 | <a name="input_cdn_add_response_headers"></a> [cdn\_add\_response\_headers](#input\_cdn\_add\_response\_headers) | List of response headers to add at the CDN Front Door for all endpoints `[{ "Name" = "Strict-Transport-Security", "value" = "max-age=31536000" }]` | `list(map(string))` | `[]` | no |
 | <a name="input_cdn_remove_response_headers"></a> [cdn\_remove\_response\_headers](#input\_cdn\_remove\_response\_headers) | List of response headers to remove at the CDN Front Door for all endpoints | `list(string)` | `[]` | no |
@@ -93,6 +95,7 @@ key                  = "terraform.tstate"
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources | `map(string)` | n/a | yes |
 | <a name="input_tfvars_filename"></a> [tfvars\_filename](#input\_tfvars\_filename) | tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place. | `string` | n/a | yes |
 | <a name="input_waf_application"></a> [waf\_application](#input\_waf\_application) | Which product to apply the WAF to. Must be either CDN or AppGatewayV2 | `string` | n/a | yes |
+| <a name="input_waf_custom_rules"></a> [waf\_custom\_rules](#input\_waf\_custom\_rules) | Map of all Custom rules you want to apply to the WAF | <pre>map(object({<br>    priority : number,<br>    action : string<br>    match_conditions : map(object({<br>      match_variable : string,<br>      match_values : optional(list(string), []),<br>      operator : optional(string, "Any"),<br>      selector : optional(string, ""),<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_waf_mode"></a> [waf\_mode](#input\_waf\_mode) | WAF mode | `string` | n/a | yes |
 | <a name="input_web_app_service_targets"></a> [web\_app\_service\_targets](#input\_web\_app\_service\_targets) | A map of Web App Services to configure as Front Door or App Gateway V2 targets | <pre>map(object({<br>    resource_group : string,<br>    os : string<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true)<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), [])<br>  }))</pre> | `{}` | no |
 

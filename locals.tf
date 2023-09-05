@@ -51,9 +51,13 @@ locals {
   cdn_add_response_headers    = var.cdn_add_response_headers
   cdn_remove_response_headers = var.cdn_remove_response_headers
 
-  enable_waf      = var.enable_waf
-  waf_application = var.waf_application
-  waf_mode        = var.waf_mode
+  enable_waf       = var.enable_waf
+  waf_application  = var.waf_application
+  waf_mode         = var.waf_mode
+  waf_custom_rules = var.waf_custom_rules
+
+  app_gateway_v2_waf_managed_rulesets            = var.app_gateway_v2_waf_managed_rulesets
+  app_gateway_v2_waf_managed_rulesets_exclusions = var.app_gateway_v2_waf_managed_rulesets_exclusions
 
   tags = var.tags
 }
