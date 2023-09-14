@@ -4,16 +4,11 @@ data "azurerm_resource_group" "container_apps" {
   name = each.value.resource_group
 }
 
-data "azapi_resource" "container_apps" {
+data "azurerm_container_app" "container_apps" {
   for_each = local.container_app_targets
 
-  name      = each.key
-  parent_id = data.azurerm_resource_group.container_apps[each.key].id
-  type      = "Microsoft.App/containerApps@2022-03-01"
-
-  response_export_values = [
-    "properties.configuration.ingress.fqdn",
-  ]
+  name                = each.key
+  resource_group_name = data.azurerm_resource_group.container_apps[each.key].name
 }
 
 data "azurerm_windows_web_app" "web_apps" {

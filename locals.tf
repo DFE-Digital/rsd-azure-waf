@@ -25,7 +25,7 @@ locals {
     {
       for container_app_target_name, container_app_target_value in local.container_app_targets : replace(container_app_target_name, local.environment, "") => merge(
         {
-          domain = jsondecode(data.azapi_resource.container_apps[container_app_target_name].output).properties.configuration.ingress.fqdn
+          domain = data.azurerm_container_app.container_apps[container_app_target_name].ingress[0].fqdn
         },
         container_app_target_value
       )

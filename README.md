@@ -45,14 +45,12 @@ key                  = "terraform.tstate"
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | >= 1.1.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.51.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.9.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
 
 ## Modules
@@ -66,7 +64,7 @@ key                  = "terraform.tstate"
 
 | Name | Type |
 |------|------|
-| [azapi_resource.container_apps](https://registry.terraform.io/providers/Azure/azapi/latest/docs/data-sources/resource) | data source |
+| [azurerm_container_app.container_apps](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/container_app) | data source |
 | [azurerm_linux_web_app.web_apps](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/linux_web_app) | data source |
 | [azurerm_resource_group.container_apps](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_windows_web_app.web_apps](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/windows_web_app) | data source |
