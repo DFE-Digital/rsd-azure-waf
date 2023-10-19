@@ -1,4 +1,4 @@
-module "azurerm_front_door_waf" {
+module "waf" {
   source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.3.3"
 
   environment    = local.environment
