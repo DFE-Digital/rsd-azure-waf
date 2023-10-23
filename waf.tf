@@ -1,5 +1,5 @@
 module "waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.3.3"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.3.4"
 
   environment    = local.environment
   project_name   = local.project_name
@@ -23,6 +23,8 @@ module "waf" {
 
   cdn_add_response_headers    = local.cdn_add_response_headers
   cdn_remove_response_headers = local.cdn_remove_response_headers
+
+  existing_logic_app_workflow = local.existing_logic_app_workflow
 
   tags = local.tags
 }

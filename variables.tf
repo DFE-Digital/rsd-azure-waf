@@ -195,3 +195,15 @@ variable "cdn_remove_response_headers" {
   type        = list(string)
   default     = []
 }
+
+variable "existing_logic_app_workflow" {
+  description = "Name, and Resource Group of an existing Logic App Workflow"
+  type = object({
+    name : string
+    resource_group_name : string
+  })
+  default = {
+    name                = ""
+    resource_group_name = ""
+  }
+}
