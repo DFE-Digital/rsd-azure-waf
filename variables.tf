@@ -207,3 +207,9 @@ variable "existing_logic_app_workflow" {
     resource_group_name = ""
   }
 }
+
+variable "monitor_email_receivers" {
+  description = "A list of email addresses that should be notified by monitoring alerts"
+  type        = list(string)
+  default     = []
+}

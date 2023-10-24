@@ -25,6 +25,7 @@ module "waf" {
   cdn_remove_response_headers = local.cdn_remove_response_headers
 
   existing_logic_app_workflow = local.existing_logic_app_workflow
+  monitor_email_receivers     = local.monitor_email_receivers
 
   tags = local.tags
 }

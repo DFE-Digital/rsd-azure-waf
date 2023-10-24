@@ -13,6 +13,7 @@ locals {
   key_vault_app_gateway_certificates_access_subnet_ids = var.key_vault_app_gateway_certificates_access_subnet_ids
 
   existing_logic_app_workflow = var.existing_logic_app_workflow
+  monitor_email_receivers     = var.monitor_email_receivers
 
   response_request_timeout = var.response_request_timeout
   container_app_targets    = var.container_app_targets
