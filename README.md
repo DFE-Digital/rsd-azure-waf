@@ -58,7 +58,7 @@ key                  = "terraform.tstate"
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azurerm_key_vault"></a> [azurerm\_key\_vault](#module\_azurerm\_key\_vault) | github.com/DFE-Digital/terraform-azurerm-key-vault-tfvars | v0.2.2 |
-| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.3.3 |
+| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.3.5 |
 
 ## Resources
 
@@ -81,6 +81,7 @@ key                  = "terraform.tstate"
 | <a name="input_container_app_targets"></a> [container\_app\_targets](#input\_container\_app\_targets) | A map of Container Apps to configure as Front Door or App Gateway V2 targets | <pre>map(object({<br>    resource_group : string,<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true),<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), [])<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable WAF | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
+| <a name="input_existing_logic_app_workflow"></a> [existing\_logic\_app\_workflow](#input\_existing\_logic\_app\_workflow) | Name, and Resource Group of an existing Logic App Workflow | <pre>object({<br>    name : string<br>    resource_group_name : string<br>  })</pre> | <pre>{<br>  "name": "",<br>  "resource_group_name": ""<br>}</pre> | no |
 | <a name="input_key_vault_access_ipv4"></a> [key\_vault\_access\_ipv4](#input\_key\_vault\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the Key Vault | `list(string)` | n/a | yes |
 | <a name="input_key_vault_access_users"></a> [key\_vault\_access\_users](#input\_key\_vault\_access\_users) | List of users that require access to the Key Vault where tfvars are stored. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
 | <a name="input_key_vault_app_gateway_certificates_access_ipv4"></a> [key\_vault\_app\_gateway\_certificates\_access\_ipv4](#input\_key\_vault\_app\_gateway\_certificates\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the App Gateway Certificates Key Vault | `list(string)` | n/a | yes |
@@ -88,6 +89,7 @@ key                  = "terraform.tstate"
 | <a name="input_key_vault_app_gateway_certificates_access_users"></a> [key\_vault\_app\_gateway\_certificates\_access\_users](#input\_key\_vault\_app\_gateway\_certificates\_access\_users) | List of users that require access to the App Gateway Certificates Key Vault. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
 | <a name="input_key_vault_tfvars_enable_diagnostic_storage_account"></a> [key\_vault\_tfvars\_enable\_diagnostic\_storage\_account](#input\_key\_vault\_tfvars\_enable\_diagnostic\_storage\_account) | When enabled, creates a Storage Account for the tfvars key vault diagnostic logs | `bool` | `true` | no |
 | <a name="input_key_vault_tfvars_enable_log_analytics_workspace"></a> [key\_vault\_tfvars\_enable\_log\_analytics\_workspace](#input\_key\_vault\_tfvars\_enable\_log\_analytics\_workspace) | When enabled, creates a Log Analyics Workspace for the tfvars Key Vault | `bool` | `true` | no |
+| <a name="input_monitor_email_receivers"></a> [monitor\_email\_receivers](#input\_monitor\_email\_receivers) | A list of email addresses that should be notified by monitoring alerts | `list(string)` | `[]` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_response_request_timeout"></a> [response\_request\_timeout](#input\_response\_request\_timeout) | Azure CDN Front Door response or App Gateway V2 request timeout in seconds | `number` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources | `map(string)` | n/a | yes |
