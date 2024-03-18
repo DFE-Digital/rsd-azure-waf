@@ -1,11 +1,15 @@
 locals {
-  environment    = var.environment
-  project_name   = var.project_name
-  azure_location = var.azure_location
+  environment     = var.environment
+  project_name    = var.project_name
+  azure_location  = var.azure_location
+  resource_prefix = "${local.environment}${local.project_name}"
 
   key_vault_app_gateway_certificates_access_users      = var.key_vault_app_gateway_certificates_access_users
   key_vault_app_gateway_certificates_access_ipv4       = var.key_vault_app_gateway_certificates_access_ipv4
   key_vault_app_gateway_certificates_access_subnet_ids = var.key_vault_app_gateway_certificates_access_subnet_ids
+
+  tfvars_filename    = var.tfvars_filename
+  tfvars_access_ipv4 = var.tfvars_access_ipv4
 
   existing_logic_app_workflow = var.existing_logic_app_workflow
   monitor_email_receivers     = var.monitor_email_receivers
