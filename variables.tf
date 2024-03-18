@@ -186,3 +186,15 @@ variable "monitor_email_receivers" {
   type        = list(string)
   default     = []
 }
+
+variable "tfvars_filename" {
+  description = "Name of the TF Vars file"
+  default     = "terraform.tfvars"
+  type        = string
+}
+
+variable "tfvars_access_ipv4" {
+  description = "List of IPv4 Addresses that are permitted to access the tfvars Storage Account"
+  default     = []
+  type        = list(string)
+}
