@@ -27,6 +27,16 @@ resource "azurerm_storage_blob" "tfvars" {
   access_tier            = "Cool"
 }
 
+resource "azurerm_storage_blob" "waftfvars" {
+  name                   = "waf.tfvars"
+  storage_account_name   = azurerm_storage_account.tfvars.name
+  storage_container_name = azurerm_storage_container.tfvars.name
+  type                   = "Block"
+  source                 = "waf.tfvars"
+  content_md5            = filemd5("waf.tfvars")
+  access_tier            = "Cool"
+}
+
 resource "azurerm_storage_account_network_rules" "tfvars" {
   storage_account_id         = azurerm_storage_account.tfvars.id
   default_action             = length(local.tfvars_access_ipv4) > 0 ? "Deny" : "Allow"
@@ -39,6 +49,17 @@ resource "null_resource" "tfvars" {
   provisioner "local-exec" {
     interpreter = ["/bin/bash", "-c"]
     command     = "./scripts/check-tfvars-against-remote.sh -c \"${azurerm_storage_container.tfvars.name}\" -a \"${azurerm_storage_account.tfvars.name}\" -f \"${local.tfvars_filename}\""
+  }
+
+  triggers = {
+    tfvar_file_md5 = filemd5(local.tfvars_filename)
+  }
+}
+
+resource "null_resource" "waftfvars" {
+  provisioner "local-exec" {
+    interpreter = ["/bin/bash", "-c"]
+    command     = "./scripts/check-tfvars-against-remote.sh -c \"${azurerm_storage_container.tfvars.name}\" -a \"${azurerm_storage_account.tfvars.name}\" -f \"waf.tfvars\""
   }
 
   triggers = {
