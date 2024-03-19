@@ -63,10 +63,6 @@ resource "null_resource" "waftfvars" {
   }
 
   triggers = {
-<<<<<<< HEAD
-    tfvar_file_md5 = filemd5(local.tfvars_filename)
-=======
     tfvar_file_md5 = filemd5("waf.tfvars")
->>>>>>> dab1501 (Synchronise WAF tfvars with blob storage)
   }
 }
