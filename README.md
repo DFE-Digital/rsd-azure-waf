@@ -59,7 +59,7 @@ key                  = "terraform.tstate"
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.5.0 |
+| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.5.1 |
 
 ## Resources
 
@@ -96,11 +96,12 @@ key                  = "terraform.tstate"
 | <a name="input_monitor_email_receivers"></a> [monitor\_email\_receivers](#input\_monitor\_email\_receivers) | A list of email addresses that should be notified by monitoring alerts | `list(string)` | `[]` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_response_request_timeout"></a> [response\_request\_timeout](#input\_response\_request\_timeout) | Azure CDN Front Door response or App Gateway V2 request timeout in seconds | `number` | n/a | yes |
+| <a name="input_restrict_app_gateway_v2_to_front_door_inbound_only"></a> [restrict\_app\_gateway\_v2\_to\_front\_door\_inbound\_only](#input\_restrict\_app\_gateway\_v2\_to\_front\_door\_inbound\_only) | Restricts access to the App Gateway V2 by creating a network security group that only allows 'AzureFrontDoor.Backend' inbound, and attaches it to the subnet of the application gateway. | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources | `map(string)` | n/a | yes |
 | <a name="input_tfvars_access_ipv4"></a> [tfvars\_access\_ipv4](#input\_tfvars\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the tfvars Storage Account | `list(string)` | `[]` | no |
 | <a name="input_tfvars_filename"></a> [tfvars\_filename](#input\_tfvars\_filename) | Name of the TF Vars file | `string` | `"terraform.tfvars"` | no |
 | <a name="input_waf_application"></a> [waf\_application](#input\_waf\_application) | Which product to apply the WAF to. Must be either CDN or AppGatewayV2 | `string` | n/a | yes |
-| <a name="input_waf_custom_rules"></a> [waf\_custom\_rules](#input\_waf\_custom\_rules) | Map of all Custom rules you want to apply to the WAF | <pre>map(object({<br>    priority : number,<br>    action : string<br>    match_conditions : map(object({<br>      match_variable : string,<br>      match_values : optional(list(string), []),<br>      operator : optional(string, "Any"),<br>      selector : optional(string, ""),<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_waf_custom_rules"></a> [waf\_custom\_rules](#input\_waf\_custom\_rules) | Map of all Custom rules you want to apply to the WAF | <pre>map(object({<br>    priority : number,<br>    action : string<br>    match_conditions : map(object({<br>      match_variable : string,<br>      match_values : optional(list(string), []),<br>      operator : optional(string, "Any"),<br>      selector : optional(string, ""),<br>      negation_condition : optional(bool, false),<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_waf_mode"></a> [waf\_mode](#input\_waf\_mode) | WAF mode | `string` | n/a | yes |
 | <a name="input_web_app_service_targets"></a> [web\_app\_service\_targets](#input\_web\_app\_service\_targets) | A map of Web App Services to configure as Front Door or App Gateway V2 targets | <pre>map(object({<br>    resource_group : string,<br>    os : string<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true)<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), [])<br>  }))</pre> | `{}` | no |
 

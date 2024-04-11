@@ -53,6 +53,8 @@ locals {
   cdn_add_response_headers    = var.cdn_add_response_headers
   cdn_remove_response_headers = var.cdn_remove_response_headers
 
+  restrict_app_gateway_v2_to_front_door_inbound_only = var.restrict_app_gateway_v2_to_front_door_inbound_only
+
   enable_waf       = var.enable_waf
   waf_application  = var.waf_application
   waf_mode         = var.waf_mode
