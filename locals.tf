@@ -8,8 +8,9 @@ locals {
   key_vault_app_gateway_certificates_access_ipv4       = var.key_vault_app_gateway_certificates_access_ipv4
   key_vault_app_gateway_certificates_access_subnet_ids = var.key_vault_app_gateway_certificates_access_subnet_ids
 
-  tfvars_filename    = var.tfvars_filename
-  tfvars_access_ipv4 = var.tfvars_access_ipv4
+  tfvars_filename     = var.tfvars_filename
+  tfvars_access_ipv4  = var.tfvars_access_ipv4
+  waf_tfvars_filename = var.waf_tfvars_filename
 
   existing_logic_app_workflow = var.existing_logic_app_workflow
   monitor_email_receivers     = var.monitor_email_receivers

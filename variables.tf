@@ -205,3 +205,9 @@ variable "restrict_app_gateway_v2_to_front_door_inbound_only" {
   type        = bool
   default     = false
 }
+
+variable "waf_tfvars_filename" {
+  description = "Name of the TF Vars file that contains the WAF rules"
+  default     = "waf.tfvars"
+  type        = string
+}
