@@ -28,12 +28,12 @@ resource "azurerm_storage_blob" "tfvars" {
 }
 
 resource "azurerm_storage_blob" "waftfvars" {
-  name                   = "waf.tfvars"
+  name                   = local.waf_tfvars_filename
   storage_account_name   = azurerm_storage_account.tfvars.name
   storage_container_name = azurerm_storage_container.tfvars.name
   type                   = "Block"
-  source                 = "waf.tfvars"
-  content_md5            = filemd5("waf.tfvars")
+  source                 = local.waf_tfvars_filename
+  content_md5            = filemd5(local.waf_tfvars_filename)
   access_tier            = "Cool"
 }
 
@@ -63,6 +63,6 @@ resource "null_resource" "waftfvars" {
   }
 
   triggers = {
-    tfvar_file_md5 = filemd5("waf.tfvars")
+    tfvar_file_md5 = filemd5(local.waf_tfvars_filename)
   }
 }

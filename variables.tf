@@ -60,6 +60,7 @@ variable "waf_custom_rules" {
       match_values : optional(list(string), []),
       operator : optional(string, "Any"),
       selector : optional(string, ""),
+      negation_condition : optional(bool, false),
     }))
   }))
   default = {}
@@ -197,4 +198,16 @@ variable "tfvars_access_ipv4" {
   description = "List of IPv4 Addresses that are permitted to access the tfvars Storage Account"
   default     = []
   type        = list(string)
+}
+
+variable "restrict_app_gateway_v2_to_front_door_inbound_only" {
+  description = "Restricts access to the App Gateway V2 by creating a network security group that only allows 'AzureFrontDoor.Backend' inbound, and attaches it to the subnet of the application gateway."
+  type        = bool
+  default     = false
+}
+
+variable "waf_tfvars_filename" {
+  description = "Name of the TF Vars file that contains the WAF rules"
+  default     = "waf.tfvars"
+  type        = string
 }

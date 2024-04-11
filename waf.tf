@@ -1,5 +1,5 @@
 module "waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.5.0"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.5.1"
 
   environment    = local.environment
   project_name   = local.project_name
@@ -13,6 +13,8 @@ module "waf" {
   waf_application  = local.waf_application
   waf_mode         = local.waf_mode
   waf_custom_rules = local.waf_custom_rules
+
+  restrict_app_gateway_v2_to_front_door_inbound_only = local.restrict_app_gateway_v2_to_front_door_inbound_only
 
   app_gateway_v2_waf_managed_rulesets            = local.app_gateway_v2_waf_managed_rulesets
   app_gateway_v2_waf_managed_rulesets_exclusions = local.app_gateway_v2_waf_managed_rulesets_exclusions
