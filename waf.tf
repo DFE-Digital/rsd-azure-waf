@@ -1,5 +1,5 @@
 module "waf" {
-  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=v0.5.1"
+  source = "github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf?ref=add-ability-to-provide-custom-errors"
 
   environment    = local.environment
   project_name   = local.project_name

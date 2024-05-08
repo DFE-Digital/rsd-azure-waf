@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DIST_DIR="./node_modules/govuk-frontend/dist/govuk"
+PUBLIC_DIR="./public"
+
+# Get latest govuk-frontend
+npm update
+
+# Create public directories
+mkdir -p "$PUBLIC_DIR/javascripts"
+mkdir -p "$PUBLIC_DIR/stylesheets"
+mkdir -p "$PUBLIC_DIR/assets"
+
+# Copy required assets
+cp $DIST_DIR/assets/images/{favicon.ico,favicon.svg} $PUBLIC_DIR/.
+cp $DIST_DIR/govuk-frontend.min.css $PUBLIC_DIR/stylesheets/.
+cp $DIST_DIR/assets/manifest.json $PUBLIC_DIR/assets/.
+cp $DIST_DIR/govuk-frontend.min.js $PUBLIC_DIR/javascripts/.
+cp -r $DIST_DIR/assets/fonts $PUBLIC_DIR/assets/.
+
+# Remove sourceMappingURL
+# (AppGateway error pages must only include absolute URLs)
+sed -i '' '/^.*sourceMappingURL=/d' "$PUBLIC_DIR/stylesheets/govuk-frontend.min.css"
