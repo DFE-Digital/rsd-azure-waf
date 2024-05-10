@@ -1,23 +1,31 @@
 #!/bin/bash
 
-DIST_DIR="./node_modules/govuk-frontend/dist/govuk"
+GOVUK_DIST_DIR="./node_modules/govuk-frontend/dist/govuk"
+DFE_BASE_DIR="./node_modules/dfe-frontend"
+DFE_DIST_DIR="${DFE_BASE_DIR}/dist"
 PUBLIC_DIR="./public"
 
-# Get latest govuk-frontend
+# Get latest govuk-frontend and dfe-frontend
 npm update
 
 # Create public directories
 mkdir -p "$PUBLIC_DIR/javascripts"
 mkdir -p "$PUBLIC_DIR/stylesheets"
-mkdir -p "$PUBLIC_DIR/assets"
+mkdir -p "$PUBLIC_DIR/assets/images"
 
-# Copy required assets
-cp $DIST_DIR/assets/images/{favicon.ico,favicon.svg} $PUBLIC_DIR/.
-cp $DIST_DIR/govuk-frontend.min.css $PUBLIC_DIR/stylesheets/.
-cp $DIST_DIR/assets/manifest.json $PUBLIC_DIR/assets/.
-cp $DIST_DIR/govuk-frontend.min.js $PUBLIC_DIR/javascripts/.
-cp -r $DIST_DIR/assets/fonts $PUBLIC_DIR/assets/.
+# Copy required govuk assets
+cp $GOVUK_DIST_DIR/govuk-frontend.min.css $PUBLIC_DIR/stylesheets/.
+cp $GOVUK_DIST_DIR/assets/manifest.json $PUBLIC_DIR/assets/.
+cp -r $GOVUK_DIST_DIR/assets/images $PUBLIC_DIR/assets/.
+cp $GOVUK_DIST_DIR/govuk-frontend.min.js $PUBLIC_DIR/javascripts/.
+cp -r $GOVUK_DIST_DIR/assets/fonts $PUBLIC_DIR/assets/.
+
+# Copy required dfe assets
+cp $DFE_BASE_DIR/packages/assets/{dfe-logo.png,dfe-logo-alt.png} $PUBLIC_DIR/assets/images/.
+cp $DFE_DIST_DIR/dfefrontend.css $PUBLIC_DIR/stylesheets/.
+cp $DFE_DIST_DIR/dfefrontend.min.js $PUBLIC_DIR/javascripts/.
 
 # Remove sourceMappingURL
 # (AppGateway error pages must only include absolute URLs)
 sed -i '' '/^.*sourceMappingURL=/d' "$PUBLIC_DIR/stylesheets/govuk-frontend.min.css"
+sed -i '' '/^.*sourceMappingURL=/d' "$PUBLIC_DIR/stylesheets/dfefrontend.css"
