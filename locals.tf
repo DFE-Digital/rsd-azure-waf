@@ -68,28 +68,28 @@ locals {
 
   custom_error_web_pages = { for k, v in local.custom_error_web_page_storage_accounts :
     k => {
-      "govuk/403.html": templatefile(
+      "govuk/403.html" : templatefile(
         "${path.root}/error-response-page/templates/govuk/403.html.tftpl", {
-          base_url: trim(v, "/")
-          title: "403 - Forbidden"
+          base_url : trim(v, "/")
+          title : "403 - Forbidden"
         }
       ),
-      "govuk/502.html": templatefile(
+      "govuk/502.html" : templatefile(
         "${path.root}/error-response-page/templates/govuk/502.html.tftpl", {
-          base_url: trim(v, "/")
-          title: "502 - Bad Gateway"
+          base_url : trim(v, "/")
+          title : "502 - Bad Gateway"
         }
       )
-      "dfe/403.html": templatefile(
+      "dfe/403.html" : templatefile(
         "${path.root}/error-response-page/templates/dfe/403.html.tftpl", {
-          base_url: trim(v, "/")
-          title: "403 - Forbidden"
+          base_url : trim(v, "/")
+          title : "403 - Forbidden"
         }
       ),
-      "dfe/502.html": templatefile(
+      "dfe/502.html" : templatefile(
         "${path.root}/error-response-page/templates/dfe/502.html.tftpl", {
-          base_url: trim(v, "/")
-          title: "502 - Bad Gateway"
+          base_url : trim(v, "/")
+          title : "502 - Bad Gateway"
         }
       )
     }
