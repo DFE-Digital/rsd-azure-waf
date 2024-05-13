@@ -36,3 +36,6 @@ override.tf.json
 backend.vars
 
 .DS_Store
+
+# Node dependency directories
+node_modules/

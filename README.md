@@ -52,14 +52,14 @@ key                  = "terraform.tstate"
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.96.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.103.1 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.2.2 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v0.5.1 |
+| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.0.0 |
 
 ## Resources
 
@@ -67,6 +67,10 @@ key                  = "terraform.tstate"
 |------|------|
 | [azurerm_storage_account.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account_network_rules.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules) | resource |
+| [azurerm_storage_blob.dfe_403](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
+| [azurerm_storage_blob.dfe_502](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
+| [azurerm_storage_blob.govuk_403](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
+| [azurerm_storage_blob.govuk_502](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_blob.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_blob.waftfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_container.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
@@ -86,7 +90,7 @@ key                  = "terraform.tstate"
 | <a name="input_azure_location"></a> [azure\_location](#input\_azure\_location) | Azure location in which to launch resources. | `string` | n/a | yes |
 | <a name="input_cdn_add_response_headers"></a> [cdn\_add\_response\_headers](#input\_cdn\_add\_response\_headers) | List of response headers to add at the CDN Front Door for all endpoints `[{ "Name" = "Strict-Transport-Security", "value" = "max-age=31536000" }]` | `list(map(string))` | `[]` | no |
 | <a name="input_cdn_remove_response_headers"></a> [cdn\_remove\_response\_headers](#input\_cdn\_remove\_response\_headers) | List of response headers to remove at the CDN Front Door for all endpoints | `list(string)` | `[]` | no |
-| <a name="input_container_app_targets"></a> [container\_app\_targets](#input\_container\_app\_targets) | A map of Container Apps to configure as Front Door or App Gateway V2 targets | <pre>map(object({<br>    resource_group : string,<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true),<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), [])<br>  }))</pre> | `{}` | no |
+| <a name="input_container_app_targets"></a> [container\_app\_targets](#input\_container\_app\_targets) | A map of Container Apps to configure as Front Door or App Gateway V2 targets | <pre>map(object({<br>    resource_group : string,<br>    create_custom_domain : optional(bool, false),<br>    enable_health_probe : optional(bool, true),<br>    health_probe_interval : optional(number, 60),<br>    health_probe_request_type : optional(string, "HEAD"),<br>    health_probe_path : optional(string, "/"),<br>    cdn_add_response_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_add_request_headers : optional(list(object({<br>      name : string,<br>      value : string<br>      })<br>    ), []),<br>    cdn_remove_response_headers : optional(list(string), []),<br>    cdn_remove_request_headers : optional(list(string), []),<br>    custom_errors : optional(object({<br>      error_page_directory : string,<br>      error_pages : map(string)<br>    }), null)<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable WAF | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_existing_logic_app_workflow"></a> [existing\_logic\_app\_workflow](#input\_existing\_logic\_app\_workflow) | Name, and Resource Group of an existing Logic App Workflow | <pre>object({<br>    name : string<br>    resource_group_name : string<br>  })</pre> | <pre>{<br>  "name": "",<br>  "resource_group_name": ""<br>}</pre> | no |
