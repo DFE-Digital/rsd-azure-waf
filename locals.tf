@@ -64,5 +64,36 @@ locals {
   app_gateway_v2_waf_managed_rulesets            = var.app_gateway_v2_waf_managed_rulesets
   app_gateway_v2_waf_managed_rulesets_exclusions = var.app_gateway_v2_waf_managed_rulesets_exclusions
 
+  custom_error_web_page_storage_accounts = { for storage in module.waf.custom_error_web_page_storage_accounts : storage.name => storage.primary_web_endpoint }
+
+  custom_error_web_pages = { for k, v in local.custom_error_web_page_storage_accounts :
+    k => {
+      "govuk/403.html": templatefile(
+        "${path.root}/error-response-page/templates/govuk/403.html.tftpl", {
+          base_url: trim(v, "/")
+          title: "403 - Forbidden"
+        }
+      ),
+      "govuk/502.html": templatefile(
+        "${path.root}/error-response-page/templates/govuk/502.html.tftpl", {
+          base_url: trim(v, "/")
+          title: "502 - Bad Gateway"
+        }
+      )
+      "dfe/403.html": templatefile(
+        "${path.root}/error-response-page/templates/dfe/403.html.tftpl", {
+          base_url: trim(v, "/")
+          title: "403 - Forbidden"
+        }
+      ),
+      "dfe/502.html": templatefile(
+        "${path.root}/error-response-page/templates/dfe/502.html.tftpl", {
+          base_url: trim(v, "/")
+          title: "502 - Bad Gateway"
+        }
+      )
+    }
+  }
+
   tags = var.tags
 }
