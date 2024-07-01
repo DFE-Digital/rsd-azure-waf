@@ -4,10 +4,6 @@ locals {
   azure_location  = var.azure_location
   resource_prefix = "${local.environment}${local.project_name}"
 
-  key_vault_app_gateway_certificates_access_users      = var.key_vault_app_gateway_certificates_access_users
-  key_vault_app_gateway_certificates_access_ipv4       = var.key_vault_app_gateway_certificates_access_ipv4
-  key_vault_app_gateway_certificates_access_subnet_ids = var.key_vault_app_gateway_certificates_access_subnet_ids
-
   tfvars_filename     = var.tfvars_filename
   tfvars_access_ipv4  = var.tfvars_access_ipv4
   waf_tfvars_filename = var.waf_tfvars_filename

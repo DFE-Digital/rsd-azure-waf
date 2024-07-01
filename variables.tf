@@ -39,22 +39,6 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "key_vault_app_gateway_certificates_access_users" {
-  description = "List of users that require access to the App Gateway Certificates Key Vault. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform"
-  type        = list(string)
-}
-
-variable "key_vault_app_gateway_certificates_access_ipv4" {
-  description = "List of IPv4 Addresses that are permitted to access the App Gateway Certificates Key Vault"
-  type        = list(string)
-}
-
-variable "key_vault_app_gateway_certificates_access_subnet_ids" {
-  description = "List of Azure Subnet IDs that are permitted to access the App Gateway Certificates Key Vault"
-  type        = list(string)
-  default     = []
-}
-
 variable "response_request_timeout" {
   description = "Azure CDN Front Door response or App Gateway V2 request timeout in seconds"
   type        = number

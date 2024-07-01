@@ -59,7 +59,7 @@ key                  = "terraform.tstate"
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.0.0 |
+| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.1.0 |
 
 ## Resources
 
@@ -98,9 +98,6 @@ key                  = "terraform.tstate"
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable WAF | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_existing_logic_app_workflow"></a> [existing\_logic\_app\_workflow](#input\_existing\_logic\_app\_workflow) | Name, and Resource Group of an existing Logic App Workflow | <pre>object({<br>    name : string<br>    resource_group_name : string<br>  })</pre> | <pre>{<br>  "name": "",<br>  "resource_group_name": ""<br>}</pre> | no |
-| <a name="input_key_vault_app_gateway_certificates_access_ipv4"></a> [key\_vault\_app\_gateway\_certificates\_access\_ipv4](#input\_key\_vault\_app\_gateway\_certificates\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the App Gateway Certificates Key Vault | `list(string)` | n/a | yes |
-| <a name="input_key_vault_app_gateway_certificates_access_subnet_ids"></a> [key\_vault\_app\_gateway\_certificates\_access\_subnet\_ids](#input\_key\_vault\_app\_gateway\_certificates\_access\_subnet\_ids) | List of Azure Subnet IDs that are permitted to access the App Gateway Certificates Key Vault | `list(string)` | `[]` | no |
-| <a name="input_key_vault_app_gateway_certificates_access_users"></a> [key\_vault\_app\_gateway\_certificates\_access\_users](#input\_key\_vault\_app\_gateway\_certificates\_access\_users) | List of users that require access to the App Gateway Certificates Key Vault. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
 | <a name="input_monitor_email_receivers"></a> [monitor\_email\_receivers](#input\_monitor\_email\_receivers) | A list of email addresses that should be notified by monitoring alerts | `list(string)` | `[]` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_response_request_timeout"></a> [response\_request\_timeout](#input\_response\_request\_timeout) | Azure CDN Front Door response or App Gateway V2 request timeout in seconds | `number` | n/a | yes |
