@@ -52,14 +52,14 @@ key                  = "terraform.tstate"
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.103.1 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.3.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.2.3 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.2.1 |
+| <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.3.0 |
 
 ## Resources
 
