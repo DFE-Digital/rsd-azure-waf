@@ -11,6 +11,8 @@ locals {
   existing_logic_app_workflow = var.existing_logic_app_workflow
   monitor_email_receivers     = var.monitor_email_receivers
 
+  virtual_network_address_space = var.virtual_network_address_space
+
   response_request_timeout = var.response_request_timeout
   container_app_targets    = var.container_app_targets
   web_app_service_targets  = var.web_app_service_targets

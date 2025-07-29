@@ -220,3 +220,9 @@ variable "waf_tfvars_filename" {
   default     = "waf.tfvars"
   type        = string
 }
+
+variable "virtual_network_address_space" {
+  description = "Virtual Network address space CIDR"
+  type        = string
+  default     = "172.16.0.0/12"
+}

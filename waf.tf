@@ -7,6 +7,8 @@ module "waf" {
 
   response_request_timeout = local.response_request_timeout
 
+  virtual_network_address_space = local.virtual_network_address_space
+
   waf_targets = local.waf_targets
 
   enable_waf       = local.enable_waf
