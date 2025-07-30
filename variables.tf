@@ -85,6 +85,10 @@ variable "container_app_targets" {
     health_probe_interval : optional(number, 60),
     health_probe_request_type : optional(string, "HEAD"),
     health_probe_path : optional(string, "/"),
+    vnet_peering_target : optional(object({
+      name : string,
+      resource_group_name : string
+    }))
     cdn_add_response_headers : optional(list(object({
       name : string,
       value : string
