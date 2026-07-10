@@ -43,7 +43,7 @@ key                  = "terraform.tstate"
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2 |
@@ -51,20 +51,20 @@ key                  = "terraform.tstate"
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.38.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.2.4 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_waf"></a> [waf](#module\_waf) | github.com/DFE-Digital/terraform-azurerm-front-door-app-gateway-waf | v1.6.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_storage_account.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account_network_rules.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules) | resource |
 | [azurerm_storage_blob.dfe_403](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
@@ -84,7 +84,7 @@ key                  = "terraform.tstate"
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_app_gateway_v2_waf_managed_rulesets"></a> [app\_gateway\_v2\_waf\_managed\_rulesets](#input\_app\_gateway\_v2\_waf\_managed\_rulesets) | Map of all Managed rules you want to apply to the App Gateway WAF, including any overrides | <pre>map(object({<br/>    version : string,<br/>    overrides : optional(map(object({<br/>      rules : map(object({<br/>        enabled : bool,<br/>        action : optional(string, "Block")<br/>      }))<br/>    })), {})<br/>  }))</pre> | <pre>{<br/>  "Microsoft_BotManagerRuleSet": {<br/>    "version": "1.0"<br/>  },<br/>  "OWASP": {<br/>    "version": "3.2"<br/>  }<br/>}</pre> | no |
 | <a name="input_app_gateway_v2_waf_managed_rulesets_exclusions"></a> [app\_gateway\_v2\_waf\_managed\_rulesets\_exclusions](#input\_app\_gateway\_v2\_waf\_managed\_rulesets\_exclusions) | Map of all exclusions and the associated Managed rules to apply to the App Gateway WAF | <pre>map(object({<br/>    match_variable : string,<br/>    selector : string,<br/>    selector_match_operator : string,<br/>    excluded_rule_set : map(object({<br/>      version : string,<br/>      rule_group_name : string,<br/>      excluded_rules : list(string)<br/>    }))<br/>  }))</pre> | `{}` | no |
 | <a name="input_azure_client_id"></a> [azure\_client\_id](#input\_azure\_client\_id) | Service Principal Client ID | `string` | n/a | yes |
@@ -107,6 +107,7 @@ key                  = "terraform.tstate"
 | <a name="input_tfvars_filename"></a> [tfvars\_filename](#input\_tfvars\_filename) | Name of the TF Vars file | `string` | `"terraform.tfvars"` | no |
 | <a name="input_virtual_network_address_space"></a> [virtual\_network\_address\_space](#input\_virtual\_network\_address\_space) | Virtual Network address space CIDR | `string` | `"172.16.0.0/12"` | no |
 | <a name="input_waf_application"></a> [waf\_application](#input\_waf\_application) | Which product to apply the WAF to. Must be either CDN or AppGatewayV2 | `string` | n/a | yes |
+| <a name="input_waf_custom_block_response_status_code"></a> [waf\_custom\_block\_response\_status\_code](#input\_waf\_custom\_block\_response\_status\_code) | Custom response code for all Block rules. | `number` | `0` | no |
 | <a name="input_waf_custom_rules"></a> [waf\_custom\_rules](#input\_waf\_custom\_rules) | Map of all Custom rules you want to apply to the WAF | <pre>map(object({<br/>    priority : number,<br/>    action : string<br/>    match_conditions : map(object({<br/>      match_variable : string,<br/>      match_values : optional(list(string), []),<br/>      operator : optional(string, "Any"),<br/>      selector : optional(string, ""),<br/>      negation_condition : optional(bool, false),<br/>    }))<br/>  }))</pre> | `{}` | no |
 | <a name="input_waf_mode"></a> [waf\_mode](#input\_waf\_mode) | WAF mode | `string` | n/a | yes |
 | <a name="input_waf_tfvars_filename"></a> [waf\_tfvars\_filename](#input\_waf\_tfvars\_filename) | Name of the TF Vars file that contains the WAF rules | `string` | `"waf.tfvars"` | no |

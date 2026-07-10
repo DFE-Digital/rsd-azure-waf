@@ -71,6 +71,12 @@ variable "waf_custom_rules" {
   default = {}
 }
 
+variable "waf_custom_block_response_status_code" {
+  description = "Custom response code for all Block rules."
+  type        = number
+  default     = 0
+}
+
 variable "waf_mode" {
   description = "WAF mode"
   type        = string

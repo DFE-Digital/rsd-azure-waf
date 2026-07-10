@@ -11,10 +11,11 @@ module "waf" {
 
   waf_targets = local.waf_targets
 
-  enable_waf       = local.enable_waf
-  waf_application  = local.waf_application
-  waf_mode         = local.waf_mode
-  waf_custom_rules = local.waf_custom_rules
+  enable_waf                                = local.enable_waf
+  waf_application                           = local.waf_application
+  waf_mode                                  = local.waf_mode
+  waf_custom_rules                          = local.waf_custom_rules
+  cdn_waf_custom_block_response_status_code = local.waf_custom_block_response_status_code
 
   restrict_app_gateway_v2_to_front_door_inbound_only = local.restrict_app_gateway_v2_to_front_door_inbound_only
 

@@ -54,10 +54,11 @@ locals {
 
   restrict_app_gateway_v2_to_front_door_inbound_only = var.restrict_app_gateway_v2_to_front_door_inbound_only
 
-  enable_waf       = var.enable_waf
-  waf_application  = var.waf_application
-  waf_mode         = var.waf_mode
-  waf_custom_rules = var.waf_custom_rules
+  enable_waf                            = var.enable_waf
+  waf_application                       = var.waf_application
+  waf_mode                              = var.waf_mode
+  waf_custom_rules                      = var.waf_custom_rules
+  waf_custom_block_response_status_code = var.waf_custom_block_response_status_code
 
   app_gateway_v2_waf_managed_rulesets            = var.app_gateway_v2_waf_managed_rulesets
   app_gateway_v2_waf_managed_rulesets_exclusions = var.app_gateway_v2_waf_managed_rulesets_exclusions
